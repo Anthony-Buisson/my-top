@@ -16,6 +16,29 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
+
+function onBatteryStatus(status) {
+  const shouldPlug = status.isPlugged ? '' : status.level > 40 ? '' : 'Veuillez mettre en charge l\'appareil';
+  alert("Niveau de batterie: " + status.level +'% ' + shouldPlug);
+}
+
+let onSuccess = function(position) {
+  alert('Latitude: '          + position.coords.latitude          + '\n' +
+      'Longitude: '         + position.coords.longitude         + '\n' +
+      'Altitude: '          + position.coords.altitude          + '\n' +
+      'Accuracy: '          + position.coords.accuracy          + '\n' +
+      'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+      'Heading: '           + position.coords.heading           + '\n' +
+      'Speed: '             + position.coords.speed             + '\n' +
+      'Timestamp: '         + position.timestamp                + '\n');
+};
+
+function onError(error) {
+  alert('code: '    + error.code    + '\n' +
+      'message: ' + error.message + '\n');
+}
+
 var app = {
   // Application Constructor
   initialize: function () {
@@ -30,7 +53,10 @@ var app = {
   //
   // Bind any cordova events here. Common events are:
   // 'pause', 'resume', etc.
-  onDeviceReady: function () {},
+  onDeviceReady: function () {
+    window.addEventListener("batterystatus", onBatteryStatus, false);
+    navigator.geolocation.getCurrentPosition(onSuccess, onError);
+  },
 };
 
 app.initialize();
