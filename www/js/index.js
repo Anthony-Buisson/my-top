@@ -26,12 +26,16 @@ function onBatteryStatus(status) {
 let onSuccess = function(position) {
   alert('Latitude: '          + position.coords.latitude          + '\n' +
       'Longitude: '         + position.coords.longitude         + '\n' +
-      'Altitude: '          + position.coords.altitude          + '\n' +
-      'Accuracy: '          + position.coords.accuracy          + '\n' +
-      'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
-      'Heading: '           + position.coords.heading           + '\n' +
-      'Speed: '             + position.coords.speed             + '\n' +
-      'Timestamp: '         + position.timestamp                + '\n');
+      'Altitude: '          + position.coords.altitude);
+  var mymap = L.map('map').setView([position.coords.latitude, position.coords.longitude], 13);
+  L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox/streets-v11',
+    tileSize: 512,
+    zoomOffset: -1,
+    accessToken: 'pk.eyJ1IjoiZGZqc2xkZmtqIiwiYSI6ImNrdmwzaXZ0NjNjYnIydnBnYjRzMTMweHkifQ.IvTOe3XuHO1qgKt-oroTQg'
+  }).addTo(mymap);
 };
 
 function onError(error) {
@@ -49,10 +53,6 @@ var app = {
     );
   },
 
-  // deviceready Event Handler
-  //
-  // Bind any cordova events here. Common events are:
-  // 'pause', 'resume', etc.
   onDeviceReady: function () {
     window.addEventListener("batterystatus", onBatteryStatus, false);
     navigator.geolocation.getCurrentPosition(onSuccess, onError);
