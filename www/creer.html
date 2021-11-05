@@ -65,10 +65,19 @@
           <h1 class="text-center">Créer un top</h1>
         </div>
       </div>
-      <div class="row" id="list"></div>
+      <div class="form">
+        <div>
+        <label for="title">Titre du top</label><br>
+        <input id="title" placeholder="titre du top" type="text">
+        </div>
+        <div>
+        <label for="sujets">Sujets du top</label><br>
+        <input id="sujets" placeholder="sujets, séparé par une virgule" type="text">
+        </div>
+        <button onclick="create(this)">Créer</button>
+      </div>
     </main>
     <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="js/creer.js"></script>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
             integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="

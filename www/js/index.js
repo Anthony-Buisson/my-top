@@ -1,26 +1,38 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
+const divTop = `
+<div class="col-12 col-md-6">
+    <a href="list.html?id=__link__">
+    <div class="card bg-info m-3">
+    <div class="card-body">
+        <h5 class="card-title text-center">__title__</h5>
+    </div>
+    </div>
+    </a>
+</div>
+`;
 
+const htmlToElement = (html) => {
+  const template = document.createElement("template");
+  html = html.trim(); // Never return a text node of whitespace as the result
+  template.innerHTML = html;
+  return template.content.firstChild;
+};
 
 function onBatteryStatus(status) {
   const shouldPlug = status.isPlugged ? '' : status.level > 40 ? '' : 'Veuillez mettre en charge l\'appareil';
   alert("Niveau de batterie: " + status.level +'% ' + shouldPlug);
+}
+
+function fetchTops() {
+  const tops = JSON.parse(window.localStorage.getItem('lists'));
+  if(tops) {
+    const topsDiv = document.querySelector('#tops');
+    tops.forEach((top, i) => {
+      const newDivManga = divTop
+          .replace("__title__", top.title)
+          .replace("__link__", top.title)
+      topsDiv.appendChild(htmlToElement(newDivManga));
+    });
+  }
 }
 
 let onSuccess = function(position) {
@@ -51,6 +63,7 @@ var app = {
   },
 
   onDeviceReady: function () {
+    fetchTops();
     window.addEventListener("batterystatus", onBatteryStatus, false);
     navigator.geolocation.getCurrentPosition(onSuccess, onError);
   },
