@@ -18,7 +18,8 @@
   ],
   "related_applications": [
     {
-      "platform": "web"
+      "platform": "web",
+      "id": "web"
     }
   ]
 }

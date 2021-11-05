@@ -1,13 +1,9 @@
 const divManga = `
 <div class="col-12 col-md-4">
-    <a href="__link__" target="_blank">
+    <a href="list.html?id=__link__" target="_blank">
     <div class="card">
-    <img src="__src__" class="card-img-top" />
     <div class="card-body">
-        <h5 class="card-title">__top__. __title__</h5>
-        <p class="card-text">
-            __description__
-        </p>
+        <h5 class="card-title">__title__</h5>
     </div>
     </div>
     </a>
@@ -26,13 +22,10 @@ const fetchApiDone = (json) => {
   if(!json) {
     return;
   }
-  json.forEach((manga, i) => {
+  json.forEach((list, i) => {
     const newDivManga = divManga
-      .replace("__link__", manga.link)
-      .replace("__src__", manga.img)
-      .replace("__top__", i + 1)
-      .replace("__title__", manga.name)
-      .replace("__description__", manga.description);
+      .replace("__title__", list.name)
+      .replace("__link__", list.name)
     divList.appendChild(htmlToElement(newDivManga));
   });
 };
