@@ -18,8 +18,13 @@ const htmlToElement = (html) => {
 };
 
 function onBatteryStatus(status) {
+  const alreadyAlerted = window.localStorage.getItem('alerted');
+  if(alreadyAlerted) {
+    return;
+  }
   const shouldPlug = status.isPlugged ? '' : status.level > 40 ? '' : 'Veuillez mettre en charge l\'appareil';
   alert("Niveau de batterie: " + status.level +'% ' + shouldPlug);
+  window.localStorage.setItem('alerted', 'true')
 }
 
 function fetchTops() {
@@ -32,6 +37,8 @@ function fetchTops() {
           .replace("__link__", top.title)
       topsDiv.appendChild(htmlToElement(newDivManga));
     });
+  } else {
+    navigator.vibrate(5000); // Angry navigator
   }
 }
 

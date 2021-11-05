@@ -7,7 +7,6 @@ const CACHED_FILES = [
   "https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css",
   "https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js",
   `${ORIGIN_URL}/css/index.css`,
-  `${ORIGIN_URL}/js/index.js`,
   `${ORIGIN_URL}/img/logo.png`,
 ];
 /** FUNCTIONS */

@@ -8,12 +8,12 @@
         } else {
           if ("serviceWorker" in navigator) {
             navigator.serviceWorker
-              .register("sw.js", { scope: "./" })
+              .register("sw.js", { scope: "./*" })
               .then(function (reg) {});
           }
           var OneSignal = window.OneSignal || [];
           var initConfig = {
-            appId: "0e7468fd-cf9c-4079-8af1-99e3fc4069de",
+            appId: "f7cb91cd-97ba-43a2-bb78-6d122f450132",
             notifyButton: {
               enable: true,
             },
@@ -65,16 +65,23 @@
           <h1 class="text-center">Créer un top</h1>
         </div>
       </div>
-      <div class="form">
+      <div class="text-center mx-auto form-group col-12 col-md-6">
         <div>
         <label for="title">Titre du top</label><br>
-        <input id="title" placeholder="titre du top" type="text">
+        <input class="form-control text-center" id="title" placeholder="titre du top" type="text">
         </div>
+        <br>
         <div>
         <label for="sujets">Sujets du top</label><br>
-        <input id="sujets" placeholder="sujets, séparé par une virgule" type="text">
+        <input class="form-control" id="sujets" placeholder="sujets" type="text">
+        <small class="form-text text-muted">Saisir les sujets, séparé par une virgule</small>
         </div>
-        <button onclick="create(this)">Créer</button>
+        <br>
+        <button class="btn btn-primary m-2" onclick="create(this)">Créer</button>
+        <br>
+        <small>
+          <a href="index.html">retour à l'accueil</a>
+        </small>
       </div>
     </main>
     <script type="text/javascript" src="cordova.js"></script>
